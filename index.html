@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+    <style>
+        .vermelho{
+            background-color: red;
+        }
+        .negrito{
+            font-weight: bold;
+        }
+        .azul{
+            background-color: blue;
+        }
+        .verde{
+            background-color: rgb(0, 255, 17);
+        }
+        .branco{
+            color: #fff;
+        }
+        .borda{
+            border:1px solid;
+        }
+        .div-principal{
+            width: 200px;
+            height: 200px;
+        }
+        .div-comum{
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!--{{ mensagem }}<br>
+        Valor total: {{ valorTotal }}<br>
+        Logado: {{ logado }}<br>
+        hobbie: {{ hobbies }}<br>
+        hobbie: {{ hobbies[1] }}<br>
+        Perfil: {{ perfil }}<br>
+        Perfil: {{ perfil.idade }}, {{ perfil.cursos }}<br>
+        Perfil: {{ perfil.idade }}, {{ perfil.cursos[0].nome }}<br>-->
+        <!--{{ somar() }}
+        {{ subtrair() }}
+        {{ multiplicar() }}
+        {{ dividir() }}
+        <a v-bind:href="site">Site</a>
+        <p class="negrito" :class="cor">Entendendo a diretiva v-bind</p>-->
+        <!--vai ficar class="negrito vermelho"-->
+        <!--<input type="text" v-bind:placeholder="instrucaoDePreechimento" v-bind:value="valor"></input>
+        <input type="checkbox" v-bind:checked="check"></input>-->
+       <!-- {{ mensagem.length }}
+        {{ mensagem.substr(0, 3) }}
+        <input :value="mensagem">
+        {{ 2 + 2 }}
+        <input :value="2 + 2" :class="1 == 2 ? 'verde' : estilo">
+        <input :value="2 + 2" :class="teste ? 'verde' : estilo">
+       -->
+       <!--<input type="text" v-on:keyup="imprimirTexto('Enviando Parametro', 5, xyz)">
+       <button v-on:click="mensagemAlerta()">Botão</button>
+       -->
+       <!--Forma enxuta-->
+       <!--<input type="text" @keyup="imprimirTexto()">
+       <button @click="mensagemAlerta()">Botão</button>
+       <button @click="mensagemAlerta($event, 'texto', 100)">Botão</button>-->
+       <!--<div class="borda div-principal" :class="cor">
+        Cor: {{ cor }}
+        Posição X do mouse {{ posicaoX }}
+        Posição Y do mouse {{ posicaoY }}
+       </div>
+       <hr>
+       <div @click="mudarCor('verde')" class="borda div-comum"></div>
+       <div class="borda div-comum" @mouseover="mudarCor('azul')" @mouseout="mudarCor('vermelho')"></div>
+       <div class="borda div-comum" @mousemove="coordenadas($event)"></div>
+        -->
+        <!--<a href="https://jorgesantana.net.br"
+            target="_blank"
+            v-on:click="prevenirComportamentoPadrao($event)">Link</a>-->
+            <!--ou-->
+       <!-- <a href="https://jorgesantana.net.br"
+            target="_blank"
+            v-on:click.prevent="prevenirComportamentoPadrao()">Link</a>
+            <br>
+            Mensagem: {{ msg }}
+        <hr>
+        <button @click.once="executarUmaVez()">Botão</button>
+        <p>Cliques: {{ cliques }}</p>
+        <hr>
+        <form @submit.prevent.once="prevenirUmaVez()">
+            <button type="submit">Enviar</button>
+        </form>
+        <p>Formulário: {{ formulario }}</p>
+        <hr>
+        <input type="text" @keyup.x="capturandoTeclas($event)">--><!--só vai acontecer o evento se a tecla digitada for a tecla x-->
+       <!-- <p>Teclas: {{ teclas }}</p>
+        <input type="text" @keyup.Shift.Enter="capturandoTeclas($event)">--><!--só vai acontecer o evento se a tecla digitada for a tecla x-->
+        <!--<p>Teclas: {{ teclas }}</p>-->
+        <!--<input type="text" id="inputTexto">
+        <br>
+        <select id="opcoes">
+            <option value="A">Opção 1</option>
+            <option value="B">Opção 2</option>
+            <option value="C">Opção 3</option>
+        </select>
+        <br>
+        <p id="paragrafo" style="color: red">Parágrafo</p>
+        <button @click="selecionarElementoFilho()">Botao</button>
+        <div id="bloco">Conteúdo interno da div</div>-->
+
+
+        <!--v-if simples-->
+        <!--<button @click="exibirSaldo = !exibirSaldo">Exibir saldo</button>
+        <p>Saldo: <span v-if="exibirSaldo">R$ {{ saldo }}</span></p>
+        -->
+        <!--<button @click="exibirSaldo = !exibirSaldo">
+            <span v-if="!exibirSaldo">Exibir saldo</span>
+            <span v-if="exibirSaldo">Ocultar saldo</span>
+        </button>
+        <p>Saldo: <span v-if="exibirSaldo">R$ {{ saldo }}</span></p>
+        <hr>-->
+        <!--v-if e v-else-->
+        <!--Idade: <input type="text" id="inputIdade" @blur="setIdade()">
+        <p v-if="idade < 18">Menor de idade<a><span></span></a></p>
+        <p v-else>Maior de idade</p>
+        <hr>-->
+         <!--v-if, v-else-if e v-else-->
+       <!-- Nota: <input type="text" id="inputNota" @blur="setNota()">
+        <p v-if="nota == ''">Digite a nota do aluno</p>
+        <p v-else-if="nota >= 7 && nota <= 10">Aluno aprovado</p>
+        <p v-else-if="nota >= 5 && nota < 7">Aluno em recuperação</p>
+        <p v-else-if="nota >= 0 && nota < 5">Aluno reprovado</p>
+        <p v-else>A nota informada é inválida</p>
+        <hr>-->
+
+        <!--<p @mouseover="exibirTextoAjuda = true" @mouseout="exibirTextoAjuda = false">Exemplo tooltip</p>
+        <div v-show="exibirTextoAjuda">
+            <h3>Titulo texto ajuda</h3>
+            <p>Conteudo texto ajuda</p>
+        </div>-->
+
+        <div v-html="elementosHTML"></div>
+        <div v-text="elementosHTML">Texto de exemplo</div>
+        <p v-once>Saldo Inicial: {{ saldo }}</p>
+        <p>Saldo Atualizado: {{ saldo }}</p>
+        <input type="text" id="valor">
+        <button @click="creditar()">Creditar</button>
+        <button @click="debitar()">Debitar</button>
+        <ul>
+            <!--<li v-for="curso in cursos">
+                {{ curso }}
+            </li>--><!--ou-->
+            <!--<li v-for="curso in cursos" v-text="curso">
+                {{ curso }}
+            </li>-->
+            <!--recuperar indice-->
+            
+            <li v-for="(curso, chave) in cursos" v-text="chave +' - '+ curso">
+            </li>
+        </ul>
+        <hr>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Descrição</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(curso, chave) in cursos2">
+                    <td>
+                        {{ chave }}
+                    </td>
+                    <td>
+                        {{ curso.titulo }}
+                    </td>
+                    <td>
+                        {{ curso.descricao }}
+                    </td>
+                </tr>
+                <tr v-for="({ titulo, descricao }, chave) in cursos2"><!--destructuring assigment-->
+                    <td>
+                        {{ chave }}
+                    </td>
+                    <td>
+                        {{ titulo }}
+                    </td>
+                    <td>
+                        {{ descricao }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <ul>
+            <li v-for="p in publicacoes" style="border: solid 1px; margin-bottom: 10px" :key="p.id">
+                <div>
+                    {{ p.publicacao }}
+                    <hr>
+                    <input type="text">
+                </div>
+            </li>
+        </ul>
+        <button @click="misturarArray()">Misturar publicações</button>
+        <hr>
+        <ul>
+            <li v-for="n in numero">{{ n }}</li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="c in comentarios">{{ c.id }} - {{ c.comentario }}</li>
+        </ul>
+        <button @click="adicionarElemento()">Adicionar</button>
+        <button @click="removerElemento()">Remover</button>
+        <button @click="modificarElemento()">Atualizar</button>
+        <template v-if="saudacao"><!--renderização condicional-->
+            <h1>Boas-vindas</h1>
+            <p>Conteúdo da tag <strong>template</strong></p>
+        </template>
+        <div v-for="n in 10">
+            <p>2 X {{ n }} = {{ 2 * n }}</p>
+        </div>
+        <template v-for="n in 10">
+            <p>2 X {{ n }} = {{ 2 * n }}</p>
+        </template>
+        <hr>
+        <h4>Adicionar pacientes</h4>
+        <span>Nome: </span><input type="text" id="inputNome"><br>
+        <span>Idade: </span><input type="text" id="inputIdade"><br>
+        <span>Plano: </span><input type="text" id="inputPlano"><br>
+        <button @click="adicionarPaciente()">Adicionar</button>
+        <h4>Último paciente cadastrado</h4>
+        <p v-if="pacientes.length > 0">
+            Paciente {{ pacientes[ pacientes.length - 1 ].nome }},
+            Idade {{ pacientes[ pacientes.length - 1 ].idade }},
+            Plano {{ pacientes[ pacientes.length - 1 ].plano }}
+        </p>
+        <hr>
+        <h4>Último paciente cadastrado</h4>
+        <p v-if="pacientes.length > 0">
+            {{ ultimoPaciente }}
+        </p>
+        <hr>
+        <h4>Pacientes do plano Ouro</h4>
+        <p v-for="p in pacientes">{{ p.plano == 'Ouro' ? p.nome : '' }}</p>
+        <hr>
+        <p v-for="p in pacientesPlanoOuro">{{ p.nome }}</p>
+        <hr>
+        <p v-for="p in pacientes">{{ p.nome }}</p>
+        <br>
+        <hr>
+        <!--v-model-->
+        {{ paciente }} <br>
+        <!--<input type="text" v-bind:value="paciente" v-on:keyup="setPaciente($event)">
+        <input type="text" v-bind:value="paciente" v-on:keyup="paciente = $event.target.value">-->
+        <input type="text" v-model="paciente">
+        <hr>
+        <input type="radio" value="f" v-model="sexo" name="sexo">Feminino
+        <input type="radio" value="m" v-model="sexo">Masculino
+        <hr>
+        <br>{{ sexo }}
+        <select v-model="plano">
+            <option value="" disabled>Selecione um plano</option>
+            <option value="1">Básico 1</option>
+            <option value="2">Básico 2</option>
+            <option value="3">Master</option>
+        </select>
+        <br>{{ plano }}
+        <hr>
+        <input type="checkbox" value="100" v-model="doencas">Asma
+        <input type="checkbox" value="101" v-model="doencas">Diabetes
+        <input type="checkbox" value="102" v-model="doencas">Rinite
+        <br>{{ doencas }}
+        <br>
+        <textarea v-model="diagnostico"></textarea>
+        <br> {{ diagnostico }}
+        <span>Paciente</span><input type="text" v-model="paciente2">
+        <br>
+        <ul>
+            <li v-for="p in lista">{{ p.nome }}, {{ p.idade }}</li>
+        </ul>
+    </div>
+    <script>
+
+        /*const vn = new Vue({
+            el: '#app',
+            data: {//variaveis/atributos reativos
+                mensagem: 'Primeiro template controlado pelo Vue',
+                valorTotal: 150.47,
+                logado: false,
+                hobbies: [
+                    'dormir',
+                    'jogar',
+                    'correr',
+                    'caminhar'
+                ],
+                perfil: {
+                    'nome': 'Lavynia',
+                    'idade': 25,
+                    'cursos': [
+                        { nome: 'laravel', carga: '50 horas' },
+                        { nome: 'java', carga: '80 horas' },
+                    ]
+                }
+            }
+        });//vn view model*/
+        
+        /*const vn = new Vue({
+            el: '#app',
+            data: {
+                n1: 10,
+                n2: 5
+            },
+            methods: {
+                somar: function somar(){//sintaxe convencional
+                    return this.n1 + this.n2;
+                },
+                subtrair: function() {//anônima
+                    return this.n1 - this.n2;
+                },
+                multiplicar: () => {//arrow function
+                    console.log(this);
+                    return 4 * 2;//contexto lexico
+                },
+                dividir() {//forma mais elegante de definir os pares de chave/valor
+                    let f = () => {//aqui já dentro do escopo da função, então recupera o this
+                        console.log('***', this);
+                        return 'teste';
+                    }
+                    console.log(f());
+                    return this.n1 / this.n2;
+                }
+            }
+        });
+        console.log(vn);*/
+        /*const vn = new Vue({
+            el: '#app',
+            data: {
+                site: 'https://jorgesantana.net.br',
+                cor: 'vermelho',
+                instrucaoDePreechimento: 'Placeholder - Diretiva v-bind',
+                valor: 'Entendendo a diretiva v-bind',
+                check: true
+            },
+            methods: {}
+        });*/
+        /*const vn = new Vue({
+            el: '#app',
+            data: {
+                mensagem: 'Expressao',
+                estilo: 'azul',
+                teste: true
+            },
+            methods: {}
+        });*/
+        /*const vn = new Vue({
+            el: '#app',
+            data: {
+                xyz: true
+            },
+            methods: {
+                imprimirTexto(t, n, x) {
+                    console.log(t);
+                    console.log(n);
+                    console.log(x);
+                    console.log(this.xyz);
+                },
+                mensagemAlerta(event, p1, p2) {
+                    //alert('Mensagem de alerta');
+                    console.log(event, p1, p2);
+                }
+            }
+        });*/
+        /*const vn = new Vue({
+            el: '#app',
+            data: {
+                cor: 'branco',
+                posicaoX: 0,
+                posicaoY: 0,
+            },
+            methods: {
+                mudarCor(c){
+                    this.cor = c;
+                },
+                coordenadas(e){
+                    this.posicaoX = e.clientX;
+                    this.posicaoY = e.clientY;
+                }
+            }
+        });*/
+        /*const vn = new Vue({
+            el: '#app',
+            data: {
+                msg: '',
+                cliques: 0,
+                formulario: '',
+                teclas: ''
+            },
+           /* methods: {
+                prevenirComportamentoPadrao(event) {
+                    event.preventDefault();
+                    this.msg = 'Comportamento padrão ativado';
+                }
+            }ou*/
+           /* methods: {
+                prevenirComportamentoPadrao() {
+                    this.msg = 'Comportamento padrão ativado';
+                },
+                executarUmaVez() {
+                    this.cliques++;
+                },
+                prevenirUmaVez() {
+                    this.formulario = 'Prevenindo o comportamento padrão';
+                },
+                capturandoTeclas(event) {
+                    //this.teclas = event.key;
+                    this.teclas += event.key
+                }
+            }
+        });*/
+        /*const vn = new Vue({
+            el: '#app',
+            data: {
+            },
+            methods: {
+                selecionarElementoFilho() {
+                    console.log(inputTexto);
+                    console.log(inputTexto.type);
+                    console.log(inputTexto.value);
+                    console.log(opcoes);
+                    console.log(opcoes.value);
+                    console.log(paragrafo.style.color);
+                    console.log(bloco.innerHTML);
+                }
+            }
+        });*/
+       /* new Vue({
+            el: '#app',
+            data: {
+                saldo: 4570.17,
+                exibirSaldo: false,
+                idade: 0,
+                nota: 0
+            },
+            methods: {
+                setIdade() {
+                    this.idade = inputIdade.value;
+                },
+                setNota() {
+                    this.nota = inputNota.value;
+                    console.log(this.nota);
+                }
+            }     
+        });*/
+        
+        /*new Vue({
+            el: '#app',
+            data: {
+                exibirTextoAjuda: false,
+
+            },
+            methods: {
+                
+            }     
+        });*/
+
+        new Vue({
+            el: '#app',
+            data: {
+                elementosHTML: '<p><b>Site</b></p><a href="https://jorgesantana.net.br">Site</a>',
+                saldo: 1100,
+                cursos: ['Laravel', 'Web Completo', 'banco de dados', 'Solid', 'Angular'],
+                cursos2: {
+                    1000: { titulo: 'Laravel', descricao: 'Domine o framework mais poderoso do mundo.' },
+                    10001: { titulo: 'Banco de Dados', descricao: 'Aprenda os principais bds relacionais do mercado.'}
+                },
+                publicacoes: [
+                    { id: 1, publicacao: 'Publicação 1'},
+                    { id: 2, publicacao: 'Publicação 2'},
+                    { id: 3, publicacao: 'Publicação 3'},
+                ],
+                numero: 5,
+                comentarios: [
+                    { id: 1, comentario: 'Comentário 1'},
+                    { id: 2, comentario: 'Comentário 2'},
+                    { id: 3, comentario: 'Comentário 3'},
+                ],
+                saudacao: true,
+                pacientes: [],
+                paciente: 'João da Silva',
+                sexo: '',
+                plano: '',
+                doencas: [],
+                diagnostico: '',
+                paciente2: '',
+                pacientes2: [
+                    { nome:'Laís', idade:'23' },
+                    { nome:'Kayque', idade:'19' },
+                    { nome:'Larissa', idade:'28' },
+                    { nome:'Jorge', idade:'22' },
+                    { nome:'Juniro', idade:'30'},
+                ],
+                lista: [],
+            },
+            methods: {
+                creditar() {
+                    this.saldo += parseFloat(valor.value);
+                },
+                debitar() {
+                    this.saldo -= parseFloat(valor.value);
+                },
+                misturarArray() {
+                    let misturado = [];
+
+                    misturado[0] = this.publicacoes[2];
+                    misturado[1] = this.publicacoes[0];
+                    misturado[2] = this.publicacoes[1];
+
+                    this.publicacoes = misturado;
+                },
+                adicionarElemento() {
+                   // this.comentarios[3] = { id: 4, comentarios: 'Novo comentário'};
+                   this.comentarios.push({ id: 4, comentario: 'Novo comentário' })
+                },
+                removerElemento() {
+                   this.comentarios.pop();
+                },
+                modificarElemento() {
+                   this.$set(this.comentarios, 1, { id: 2, comentario: 'Comentário 2 atualizado' })
+                },
+                adicionarPaciente() {
+                    this.pacientes.push({
+                            nome: inputNome.value,
+                            idade: inputIdade.value,
+                            plano: inputPlano.value
+                    });
+                },
+                setPaciente(e) {
+                    this.paciente = e.target.value;
+                }
+            },
+            computed: {
+                ultimoPaciente() {
+                    let key = this.pacientes.length -1;
+                    let txt = '';
+
+                    txt += 'Paciente ' + this.pacientes[key].nome;
+                    txt += ', Idade ' + this.pacientes[key].idade;
+                    txt += ', Plano ' + this.pacientes[key].plano;
+                    return txt;
+                },
+                pacientesPlanoOuro() {
+                    return this.pacientes.filter(item => item.plano == 'Ouro');
+                }
+            },
+            watch:{// o objetivo desse método é observar as mudanças de estado no atributo paciente2//esses métodos precisam ter o msm nome dos respectivos atributos
+                paciente2(valorNovo, valorAntigo) {
+                    console.log(valorNovo);
+                    this.lista = this.pacientes2.filter(p => p.nome.match(valorNovo));
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
+
